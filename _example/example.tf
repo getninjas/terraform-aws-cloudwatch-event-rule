@@ -6,9 +6,9 @@ module "event-rule" {
   source = "git::https://github.com/clouddrove/terraform-aws-cloudwatch-event-rule.git?ref=tags/0.12.0"
 
   name        = "event-rule"
-  application = "clouddrove"
+  repository  = "https://registry.terraform.io/modules/clouddrove/cloudwatch-event-rule/aws/0.14.0"
   environment = "test"
-  label_order = ["environment", "name", "application"]
+  label_order = ["name", "environment"]
 
   description         = "Event Rule."
   schedule_expression = "cron(0/5 * * * ? *)"

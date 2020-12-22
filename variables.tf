@@ -6,10 +6,16 @@ variable "name" {
   description = "Name  (e.g. `app` or `cluster`)."
 }
 
-variable "application" {
+variable "repository" {
   type        = string
   default     = ""
-  description = "Application (e.g. `cd` or `clouddrove`)."
+  description = "Terraform current module repo"
+
+  validation {
+    # regex(...) fails if it cannot find a match
+    condition     = can(regex("^https://", var.repository))
+    error_message = "The module-repo value must be a valid Git repo link."
+  }
 }
 
 variable "environment" {
@@ -20,8 +26,8 @@ variable "environment" {
 
 variable "managedby" {
   type        = string
-  default     = "anmol@clouddrove.com"
-  description = "ManagedBy, eg 'CloudDrove' or 'AnmolNagpal'."
+  default     = "hello@clouddrove.com"
+  description = "ManagedBy, eg 'CloudDrove'."
 }
 
 variable "label_order" {
@@ -70,22 +76,26 @@ variable "target_id" {
   type        = string
   default     = ""
   description = "The Amazon Resource Name (ARN) associated with the role that is used for target invocation."
+  sensitive   = true
 }
 
 variable "arn" {
   type        = string
   default     = ""
   description = "The Amazon Resource Name (ARN) associated with the role that is used for target invocation."
+  sensitive   = true
 }
 
 variable "input_path" {
   type        = string
   default     = ""
   description = "The value of the JSONPath that is used for extracting part of the matched event when passing it to the target."
+  sensitive   = true
 }
 
 variable "target_role_arn" {
   type        = string
   default     = ""
   description = "The Amazon Resource Name (ARN) of the IAM role to be used for this target when the rule is triggered. Required if ecs_target is used."
+  sensitive   = true
 }
