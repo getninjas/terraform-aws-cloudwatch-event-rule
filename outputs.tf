@@ -10,8 +10,3 @@ output "arn" {
   description = "The ARN of the cloudwatch metric alarm."
 }
 
-output "tags" {
-  value       = module.labels.tags
-  description = "A mapping of tags to assign to the resource."
-}
-
